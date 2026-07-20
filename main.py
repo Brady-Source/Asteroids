@@ -2,6 +2,7 @@ import pygame
 import sys
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from logger import log_state
+from player import Player
 
 
 def main():
@@ -14,6 +15,7 @@ def main():
 
     clock = pygame.time.Clock()
     dt = 0.0
+    player_obj = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
     while True:
         log_state()
@@ -23,6 +25,7 @@ def main():
                 sys.exit()
 
         screen.fill("black") # Sets the BG to black
+        player.draw(screen) # Re-render player
 
         pygame.display.flip() #CALL THIS LAST - Refreshes the screen
 
