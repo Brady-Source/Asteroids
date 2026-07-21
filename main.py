@@ -15,8 +15,12 @@ def main():
 
     clock = pygame.time.Clock()
     dt = 0.0
-    player_obj = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    Player.containers = (updatable, drawable)
+    Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     while True:
         log_state()
         for event in pygame.event.get():
@@ -25,7 +29,9 @@ def main():
                 sys.exit()
 
         screen.fill("black") # Sets the BG to black
-        player.draw(screen) # Re-render player
+        updatable.update(dt)
+        for shape in drawable:
+            shape.draw(screen) # Re-render player
 
         pygame.display.flip() #CALL THIS LAST - Refreshes the screen
 
