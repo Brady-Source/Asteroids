@@ -11,6 +11,15 @@ import game_state
 from game_state import GamePhase
 from game_over_screen import GameOverScreen
 
+# Setup after restart
+def setup_world(updatable, drawable, asteroids, shots):
+    Shot.containers = (shots, drawable, updatable)
+    AsteroidField.containers = (updatable,)
+    asteroidfield = AsteroidField()
+    Asteroid.containers = (asteroids, updatable, drawable)
+    Player.containers = (updatable, drawable)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0)
+    return player, asteroidfield
 
 def main():
     pygame.init()
@@ -48,12 +57,16 @@ def main():
                 running = False
                 
             if game_state.current_phase == GamePhase.GAME_OVER:
+                print(game_state.current_phase)
                 if game_over_screen.handle_event(event):
                     game_state.reset()
                     player.position.update(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
                     player.score = 0
                     updatable.empty()
                     drawable.empty()
+                    shots.empty()
+                    player, asteroidfield = setup_world(updatable, drawable, asteroids, shots)
+                    game_over_screen = GameOverScreen(player)
         
         if game_state.current_phase == GamePhase.RUNNING:
             screen.fill("black")
@@ -63,7 +76,13 @@ def main():
         elif game_state.current_phase == GamePhase.GAME_OVER:
             screen.fill("black")
             game_over_screen.draw(screen)
-
+        
+        text_score = str(player.score)
+        game_font = pygame.font.SysFont("Arial", 24)
+        while len(text_score) < 7:
+            text_score = "0" + text_score
+        text_surface = game_font.render(text_score, False, "white")
+        screen.blit(text_surface, (SCREEN_WIDTH/2 , SCREEN_WIDTH/2))
         
         if game_state.current_phase == GamePhase.RUNNING:
             for obj in asteroids:
@@ -78,7 +97,8 @@ def main():
                         obj.split()
                         shot.kill()
                         player.score += 10
-                    
+        
+        pygame.display.flip()
         dt = clock.tick(60) /1000
     
     pygame.quit()
@@ -86,3 +106,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

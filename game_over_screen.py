@@ -36,6 +36,10 @@ class GameOverScreen:
         
     def handle_event(self, event) -> bool:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            print("Mouse click at:", event.pos)
             if self.button_rect.collidepoint(event.pos):
+                print("Restart button clicked!")
                 return True
         return False
+    
+    

@@ -10,5 +10,4 @@ current_score = 0
 
 def reset():
     global current_phase, current_score
-    current_phase = GamePhase.RUNNING
-    current_phase = 0
+    currentphase = GamePhase.RUNNING
