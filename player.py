@@ -53,3 +53,6 @@ class Player(CircleShape):
             rotated_with_speed_vector = rotated_vector * PLAYER_SHOOT_SPEED
             shot.velocity = rotated_with_speed_vector
             self.shot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
+            
+    def get_score(self) -> int:
+        return self.score
