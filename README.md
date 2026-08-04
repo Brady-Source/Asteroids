@@ -6,15 +6,6 @@ https://github.com/user-attachments/assets/f409922e-2c5a-418b-be3b-f44fa96d1d08
 
 A classic Asteroids arcade game clone built with Python and Pygame. Pilot your ship, destroy incoming asteroids, and survive as long as possible — the asteroids keep coming!
 
-## Demo
-
-https://github.com/user-attachments/assets/f409922e-2c5a-418b-be3b-f44fa96d1d08
-<video width="60%" controls muted playsinline>
-  <source src="https://github.com/user-attachments/assets/f409922e-2c5a-418b-be3b-f44fa96d1d08" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-
 ## Features
 
 - Classic Asteroids gameplay with smooth 60 FPS rendering
